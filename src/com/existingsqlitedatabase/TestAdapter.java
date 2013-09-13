@@ -64,6 +64,14 @@ public class TestAdapter{
              throw mSQLException; 
          } 
      }
+ 	
+ 	public static String GetColumnValue(Cursor cur, String ColumnName) {
+ 		try {
+ 			return cur.getString(cur.getColumnIndex(ColumnName));
+ 		} catch (Exception ex) {
+ 			return "";
+ 		}
+ 	}
      
 
 } 

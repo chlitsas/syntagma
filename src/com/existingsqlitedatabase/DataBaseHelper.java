@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.InputStream; 
 import java.io.OutputStream; 
  
-import android.content.Context; 
+import android.content.Context;
 import android.database.SQLException; 
 import android.database.sqlite.SQLiteDatabase; 
 import android.database.sqlite.SQLiteOpenHelper; 
@@ -102,7 +102,7 @@ public void createDataBase() throws IOException
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		// TODO Auto-generated method stub
 		
-	} 
+	}
  
 } 
 

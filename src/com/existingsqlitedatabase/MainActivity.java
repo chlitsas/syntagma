@@ -9,8 +9,11 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 public class MainActivity extends Activity {
     //private ArrayList<String> list;
     
@@ -30,7 +33,8 @@ public class MainActivity extends Activity {
         SimpleAdapter adapter = new SimpleAdapter(this, list, R.layout.list_item,
             		new String[] {"part","description"}, new int[] {R.id.firstLine, R.id.secondLine});
         listview.setAdapter(adapter);
-                
+        
+        listview.setOnItemClickListener(mOnGalleryClick);
     }
 
     @Override
@@ -39,17 +43,14 @@ public class MainActivity extends Activity {
         return true;
     }
     
-    public void onItemClick(SimpleAdapter parent, View view,
-            int position, long id) {
-    	/*
-    	Intent i = new Intent();
-        i.setClass(ListOfHotels.this, SampleActivity.class);
-        // parameters
-        i.putExtra("position", String.valueOf(position + 1));
+    private OnItemClickListener mOnGalleryClick = new OnItemClickListener(){
 
-        // start the sample activity
-        startActivity(i);*/
-    }
+        @Override
+        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+        	Toast toast = Toast.makeText(getBaseContext(), "hello "+position, Toast.LENGTH_SHORT);
+        	toast.show();
+        }       
+    };
     
     public void LoadParts(View v) {
     	TestAdapter mDbHelper = new TestAdapter(this);
@@ -61,9 +62,9 @@ public class MainActivity extends Activity {
     	//String name = Utility.GetColumnValue(testdata, "Name");
     	//String email = Utility.GetColumnValue(testdata, "Email");
     	do{
-	    	String part = Utility.GetColumnValue(testdata, "partName");
-	    	String title = Utility.GetColumnValue(testdata, "partTitle");
-	    	String cnt = Utility.GetColumnValue(testdata, "cnt");
+	    	String part = mDbHelper.GetColumnValue(testdata, "partName");
+	    	String title = mDbHelper.GetColumnValue(testdata, "partTitle");
+	    	String cnt = mDbHelper.GetColumnValue(testdata, "cnt");
 	    	
 	    	HashMap<String,String> temp = new HashMap<String,String>();
 	    	temp.put("part",part);
